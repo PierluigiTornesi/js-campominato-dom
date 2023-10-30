@@ -1,4 +1,9 @@
 //ESECUZIONE
+
+//array che contiene le celle cliccate
+let clickedCells = [];
+
+
 //genero l'azione sul bottone quando viene premuto
 const buttonPlay = document.getElementById("play");
 buttonPlay.addEventListener("click", function() {
@@ -10,6 +15,13 @@ buttonPlay.addEventListener("click", function() {
     //verifico il valore del livello
     //se é uno creo una griglia con 100 celle
     if (diffLiv === 1) {
+
+        //genero le bombe
+        const bombs = generateBombs(100);
+
+        const maxClicks = 100 - bombs.length;
+
+
         //prendo l'elemento con la classe grid per poter aggiungere le celle
         const gridElem = document.querySelector(".grid");
         //svuoto la griglia
@@ -106,3 +118,31 @@ function handleCellClick() {
     //messaggio in console del numero della cella cliccata
     console.log(this.innerHTML);
 } 
+
+
+
+/**
+ * Genera un numero casuale compreso tra min e max
+ * @param {number} min
+ * @param {number} max
+ * @returns {number}
+ */
+function getRndNumber(min,max){
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+/**
+ * Genera un array di 16 numeri casuali senza ripetizioni compresi tra 1 e max
+ * @param {number} max
+ * @returns {Array} 
+ */
+function generateBombs(max){
+    const result = [];
+    while(result.length < 16){
+        const rndNum = getRndNumber(1,max);
+        if(!result.includes(rndNum)){
+            result.push(rndNum)
+        }
+    }
+    return result;
+}
