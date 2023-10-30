@@ -1,0 +1,109 @@
+/* reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* reset img */
+img{
+    max-width: 100%;
+}
+/* classe per l'header */
+header{
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/*  classe per il titolo dell'header*/
+.titolo{
+    display: flex;
+    align-items: center;
+    padding-left: 2rem;
+    width: 40%;
+}
+/* classe per il testo dell'header */
+.titolo h1{
+    font-size: 3rem;
+    padding-left: 1rem;
+}
+/* classe per il tasto play dentro l'header */
+.tasto{
+    width: 10%;
+    display: flex;
+    justify-content: center;
+}
+/* classe per il bottone */
+.tasto button{
+    padding: 0.2rem 1.8rem;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-right: 1rem;
+}
+.tasto select{
+    padding: 0.2rem 1.8rem;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-right: 1rem;
+}
+/* classe per il wrapper del main che conterrá la griglia */
+.wrapper{
+    width: 100%;
+    height: calc(100vh - 150px);
+    background-color: aquamarine;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+/* classe per la griglia */
+.grid{
+    display: flex;
+    flex-wrap: wrap;
+    width: 600px;
+    margin: 0 auto;
+}
+/* classe per le celle della griglia 10x10*/
+.cell-10{
+    width: calc(100% / 10);
+    aspect-ratio: 1;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+
+}
+/* classe per le celle della griglia 10x10*/
+.cell-9{
+    width: calc(100% / 9);
+    aspect-ratio: 1;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+
+}
+/* classe per le celle della griglia 10x10*/
+.cell-7{
+    width: calc(100% / 7);
+    aspect-ratio: 1;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+
+}
+
+/* classe del footer */
+footer{
+    padding: 1rem;
+    font-size: 1.2rem;
+}
+/* classe che verrá aggiunta al click delle celle per renderle blue */
+.azzurro{
+    background-color: blue;
+}
