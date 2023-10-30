@@ -1,12 +1,19 @@
 //ESECUZIONE
 
-//array che contiene le celle cliccate
+//array per le celle cliccate
 let clickedCells = [];
-
+//array per le bombe
+let bombs = [];
+//Variabile che conterrá il messaggio del risultato finale
+let message = "";
 
 //genero l'azione sul bottone quando viene premuto
 const buttonPlay = document.getElementById("play");
 buttonPlay.addEventListener("click", function() {
+
+    //faccio sparire il testo centrale
+    document.getElementById("testoCentrale").classList.add("hidden")
+
     //prendo la scelta del livello di difficoltá
     const sceltaDiff = document.getElementById("livelloDif")
     //prendo il valore del livello
@@ -15,13 +22,9 @@ buttonPlay.addEventListener("click", function() {
     //verifico il valore del livello
     //se é uno creo una griglia con 100 celle
     if (diffLiv === 1) {
-
         //genero le bombe
-        const bombs = generateBombs(100);
-
-        const maxClicks = 100 - bombs.length;
-
-
+        generateBombs(100);
+        console.log("bombe",bombs);
         //prendo l'elemento con la classe grid per poter aggiungere le celle
         const gridElem = document.querySelector(".grid");
         //svuoto la griglia
@@ -39,10 +42,14 @@ buttonPlay.addEventListener("click", function() {
             //console.log(cell);
             //inserisco le celle nell'html
             gridElem.append(cell);
+            
         } 
     } else 
         //se il livello scelto é due creo una griglia con 81 celle
         if(diffLiv === 2) {
+        //genero le bombe
+        generateBombs(81);
+        console.log("bombe",bombs);
         //prendo l'elemento con la classe grid per poter aggiungere le celle
         const gridElem = document.querySelector(".grid");
         //svuoto la griglia
@@ -63,6 +70,9 @@ buttonPlay.addEventListener("click", function() {
     }else 
         //se il livello scelto é tre creo una griglia con 49 celle
         if(diffLiv === 3){
+        //genero le bombe
+        generateBombs(49);
+        console.log("bombe",bombs);
         //prendo l'elemento con la classe grid per poter aggiungere le celle
         const gridElem = document.querySelector(".grid");
         //svuoto la griglia
@@ -113,36 +123,43 @@ function generateGridCell(innerNumber,numLiv) {
  * @returns {any}
  */
 function handleCellClick() {
-    //aggiungo il colore azzurro
-    this.classList.add("azzurro")
-    //messaggio in console del numero della cella cliccata
-    console.log(this.innerHTML);
+    if(bombs.includes(parseInt(this.innerHTML))){
+        this.classList.add("rosso");
+        message = `<h2>Hai colpito una bomba dopo ${clickedCells.length} caselle buone </h2>`;
+        //restituisco il messaggio
+        document.getElementById("message").innerHTML = message;
+    }else{
+        this.classList.add("azzurro")
+        if(!clickedCells.includes(parseInt(this.innerHTML))){
+            clickedCells.push(parseInt(this.innerHTML))
+        }
+    }
 } 
 
 
 
+
 /**
- * Genera un numero casuale compreso tra min e max
- * @param {number} min
- * @param {number} max
- * @returns {number}
+ * //funzione che genera un numero random compreso tra min e max
+ * @param {number} min numero minimo
+ * @param {number} max numero massimo
+ * @returns {number} numero casuale
  */
 function getRndNumber(min,max){
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 /**
- * Genera un array di 16 numeri casuali senza ripetizioni compresi tra 1 e max
- * @param {number} max
- * @returns {Array} 
+ * funzione che crea l'array con i numeri delle bombe, compresi tra 1 e max
+ * @param {number} max numero massimo che puó avere una bomba
+ * @returns {any} 
  */
 function generateBombs(max){
-    const result = [];
-    while(result.length < 16){
+    bombs = [];
+    while(bombs.length < 16){
         const rndNum = getRndNumber(1,max);
-        if(!result.includes(rndNum)){
-            result.push(rndNum)
+        if(!bombs.includes(rndNum)){
+            bombs.push(rndNum)
         }
     }
-    return result;
 }
